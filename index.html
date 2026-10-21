@@ -2,26 +2,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Task Manager</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevOps Practice Lab</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>My Task Manager</h1>
-        <p>Organize your day, one task at a time.</p>
+  <aside class="sidebar">
+    <h2>⚙ DevOps Lab</h2>
+    <p class="muted">ENGINEERING CONSOLE</p>
 
-        <form id="task-form">
-            <input id="task-input" type="text"
-                   placeholder="Enter a new task..." required>
-            <button type="submit">Add Task</button>
-        </form>
+    <nav>
+      <a href="#overview" class="active">▦ Dashboard</a>
+      <a href="#servers">▤ Infrastructure</a>
+      <a href="#terminal">⌘ Terminal</a>
+      <a href="#activity">◷ Activity Logs</a>
+    </nav>
 
-        <p id="task-count">0 tasks</p>
-        <ul id="task-list"></ul>
+    <div class="sidebar-footer">
+      <span class="status-dot"></span> Lab environment active
     </div>
+  </aside>
 
-    <script src="script.js"></script>
+  <main class="main-content">
+    <header class="topbar">
+      <div>
+        <p class="muted">DEVELOPER WORKSPACE</p>
+        <h1>DevOps Dashboard</h1>
+        <p class="muted">Monitor, deploy, and practice.</p>
+      </div>
+      <button id="themeBtn" class="secondary-btn">☀ Toggle theme</button>
+    </header>
+
+    <section id="overview">
+      <div class="section-heading">
+        <h2>Infrastructure Overview</h2>
+        <span class="live-label">● LIVE SIMULATION</span>
+      </div>
+
+      <div class="metrics-grid">
+        <article class="metric-card">
+          <p>CPU Usage</p>
+          <h2 id="cpuValue">42%</h2>
+          <div class="progress"><div id="cpuBar" style="width:42%"></div></div>
+          <small>Processor utilization</small>
+        </article>
+
+        <article class="metric-card">
+          <p>Memory Usage</p>
+          <h2 id="memoryValue">61%</h2>
+          <div class="progress"><div id="memoryBar" style="width:61%"></div></div>
+          <small>RAM utilization</small>
+        </article>
+
+        <article class="metric-card">
+          <p>Active Servers</p>
+          <h2 id="serverValue">3 / 3</h2>
+          <small class="success">All simulated nodes online</small>
+        </article>
+
+        <article class="metric-card">
+          <p>Deployments</p>
+          <h2 id="deployValue">12</h2>
+          <small>Successful deployments</small>
+        </article>
+      </div>
+    </section>
+
+    <section id="servers" class="panel">
+      <div class="section-heading">
+        <h2>Infrastructure Nodes</h2>
+        <button id="refreshBtn" class="secondary-btn">↻ Refresh metrics</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Node</th>
+              <th>Environment</th>
+              <th>Status</th>
+              <th>Region</th>
+            </tr>
+          </thead>
+          <tbody id="serverTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="terminal" class="panel terminal-panel">
+      <div class="terminal-header">
+        <div><span class="terminal-dot red"></span><span class="terminal-dot yellow"></span><span class="terminal-dot green"></span></div>
+        <span>devops-lab — bash simulator</span>
+        <button id="clearBtn" class="terminal-clear">Clear</button>
+      </div>
+
+      <div id="terminalOutput" class="terminal-output" aria-live="polite">
+        <p>Welcome to DevOps Practice Lab!</p>
+        <p>Type <span class="command-text">help</span> to see available commands.</p>
+      </div>
+
+      <form id="terminalForm" class="terminal-input-row">
+        <label for="commandInput">devops@lab:~$</label>
+        <input id="commandInput" type="text" placeholder="Enter a command..." autocomplete="off">
+        <button type="submit">Run</button>
+      </form>
+    </section>
+
+    <section id="activity" class="panel">
+      <div class="section-heading">
+        <h2>Activity Logs</h2>
+        <span class="muted">Latest first</span>
+      </div>
+      <ul id="activityList" class="activity-list">
+        <li><span class="success">●</span> Dashboard initialized <small>Just now</small></li>
+      </ul>
+    </section>
+
+    <footer>
+      DevOps Practice Lab · Built with HTML, CSS & JavaScript
+      <p>Simulation only — no real infrastructure is connected.</p>
+    </footer>
+  </main>
 </body>
 </html>
