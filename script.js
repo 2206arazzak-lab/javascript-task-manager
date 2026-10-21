@@ -1,64 +1,35 @@
 
-const form = document.getElementById("task-form");
-const input = document.getElementById("task-input");
-const list = document.getElementById("task-list");
-const count = document.getElementById("task-count");
-
-let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-
-function saveTasks() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-function renderTasks() {
-    list.replaceChildren();
-
-    tasks.forEach((task, index) => {
-        const li = document.createElement("li");
-        li.className = task.completed ? "completed" : "";
-
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.checked = task.completed;
-        checkbox.setAttribute("aria-label", "Complete task");
-
-        checkbox.addEventListener("change", () => {
-            tasks[index].completed = checkbox.checked;
-            saveTasks();
-            renderTasks();
-        });
-
-        const text = document.createElement("span");
-        text.textContent = task.text;
-
-        const button = document.createElement("button");
-        button.textContent = "Delete";
-        button.className = "delete-btn";
-
-        button.addEventListener("click", () => {
-            tasks.splice(index, 1);
-            saveTasks();
-            renderTasks();
-        });
-
-        li.append(checkbox, text, button);
-        list.appendChild(li);
-    });
-
-    count.textContent = `${tasks.length} task(s)`;
+h1 {
+    font-size: 42px;
 }
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
+p {
+    font-size: 20px;
+}
 
-    const text = input.value.trim();
-    if (!text) return;
+button {
+    background: white;
+    color: #764ba2;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
 
-    tasks.push({ text, completed: false });
-    saveTasks();
-    renderTasks();
-    form.reset();
-    input.focus();
-});
-
-renderTasks();
+button:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+}
