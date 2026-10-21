@@ -1,0 +1,38 @@
+
+name: Website CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f README.md
+          test -f index.html
+          test -f script.js
+          test -f style.css
+
+      - name: Check JavaScript syntax
+        run: node --check script.js
+
+      - name: Check HTML references
+        run: |
+          grep -q 'script.js' index.html
+          grep -q 'style.css' index.html
+
+      - name: CI success
+        run: echo "Website CI passed!"
